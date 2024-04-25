@@ -3,6 +3,7 @@
 body {
   margin: 0;
   display: flex;
+  overflow: hidden;
 }
 
 #root {
@@ -24,4 +25,15 @@ body {
   opacity: 0.8; */
   z-index: 2;
   pointer-events: none;
+}
+
+.timeSlider {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  margin: auto;
+  margin-top: 80px;
+  left: 0;
+  right: 0;
+  width: 90vw;
 }

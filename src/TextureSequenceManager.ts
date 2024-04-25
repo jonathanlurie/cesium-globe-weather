@@ -53,6 +53,9 @@ export class TextureSequenceManager {
   }
 
   
+  /**
+   * Loading all the texture in GPU. Not the wisest but ok for a PoC.
+   */
   async loadTextures() {
     const textures = await Promise.allSettled( this.textureInfoWithDate.map(ti => loadTextureAsync(ti.filepath)) );
     console.log(textures);
@@ -95,10 +98,16 @@ export class TextureSequenceManager {
     }
   }
 
+  /**
+   * Get the TextureInfoWithDate that starts the sequence
+   */
   getStart(): TextureInfoWithDate {
     return this.textureInfoWithDate[0];
   }
 
+  /**
+   * Get the TextureInfoWithDate that ends the sequence
+   */
   getEnd(): TextureInfoWithDate {
     return this.textureInfoWithDate.at(-1);
   }
