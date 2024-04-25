@@ -5,8 +5,8 @@ import vertexShader from './shaders/vertex.glsl?raw';
 import fragmentShader from './shaders/fragment.glsl?raw';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import './App.css'
+import { TextureSequenceManager } from './TextureSequenceManager';
 
-console.log(vertexShader, fragmentShader);
 
 
 // @ts-ignore
@@ -52,6 +52,11 @@ function App() {
 
       // Some basic texture to test globe alignment
       const texture = new THREE.TextureLoader().load('textures/total-cloud_2024-04-20T00-00-00Z.jpg' ); 
+
+      const tsm = await TextureSequenceManager.fromList("./textures/texturelist.json", true);
+
+      console.log(tsm);
+      
 
       const geometry = new THREE.SphereGeometry(envelopeRadius, 128, 128);
       // const material = new THREE.MeshBasicMaterial({side: THREE.FrontSide, opacity: 0.8, transparent: true, map:texture});
