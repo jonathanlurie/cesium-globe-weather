@@ -12,7 +12,13 @@ import { TextureSequenceManager } from './TextureSequenceManager';
 window.CESIUM_BASE_URL = '/cesium';
 
 const earthRadiusMeter = 6371 * 1000;
-const envelopeRadius = earthRadiusMeter * 1.01;
+const envelopeRadius = earthRadiusMeter * 1.;
+
+// const objectScale = new Cartesian3(earthRadiusMeter, earthRadiusMeter, earthRadiusMeter);
+// console.log("objectScale", Cartesian3.fromDegrees(0, 0, 0));
+
+// Cartesian3.fromDegrees(0, 0, -earthRadiusMeter)
+
 
 function App() {
   const isMounted = useRef<boolean>(false);
@@ -41,10 +47,11 @@ function App() {
         alpha: true
       });
       threeContainerRef.current?.appendChild(renderer.domElement);
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(cesiumContainerRef.current.clientWidth, cesiumContainerRef.current.clientHeight);
+
       const scene = new THREE.Scene();
       // @ts-ignore
-      const camera = new THREE.PerspectiveCamera(CesiumMath.toDegrees(viewer.camera.frustum.fov), window.innerWidth / window.innerHeight, 100, viewer.camera.frustum.far);
+      const camera = new THREE.PerspectiveCamera(CesiumMath.toDegrees(viewer.camera.frustum.fov), cesiumContainerRef.current.clientWidth / cesiumContainerRef.current.clientHeight, 100, viewer.camera.frustum.far);
       camera.matrixAutoUpdate = false;
       const geometry = new THREE.SphereGeometry(envelopeRadius, 128, 128);
       const material = new THREE.RawShaderMaterial( {
@@ -74,6 +81,17 @@ function App() {
       viewer.clock.clockRange = ClockRange.LOOP_STOP;
       viewer.clock.multiplier = 8000;
       viewer.timeline.zoomTo(startJulian, endJulian);
+
+      // Even when resizing the window
+      window.addEventListener("resize", () => {        
+        const width = cesiumContainerRef.current.clientWidth;
+        const height = cesiumContainerRef.current.clientHeight;
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+        renderer.setSize( width, height );
+        renderer.render(scene, camera);
+      });
+
 
       // Synchronizing the cloud globe view with the Cesium globe view
       viewer.scene.preRender.addEventListener(() => {
@@ -117,6 +135,7 @@ function App() {
 
   return (
     <>
+      <a className="ghLink" href="https://github.com/jonathanlurie/cesium-globe-weather">See source code on @jonathanlurie's GitHub</a>
       <div className="threeContainer" ref={threeContainerRef}></div>
       <div className="cesiumContainer" ref={cesiumContainerRef}></div>
     </>

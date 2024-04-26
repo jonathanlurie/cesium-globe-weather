@@ -4,6 +4,7 @@ body {
   margin: 0;
   display: flex;
   overflow: hidden;
+  background: black;
 }
 
 #root {
@@ -12,28 +13,70 @@ body {
 }
 
 .cesiumContainer {
-  width: 100%;
-  height: 100%;
   position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .threeContainer {
-  width: 100%;
-  height: 100%;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   position: absolute;
-  /* background: white;
-  opacity: 0.8; */
   z-index: 2;
   pointer-events: none;
 }
 
-.timeSlider {
-  z-index: 3;
+.ghLink {
   position: absolute;
   top: 0;
-  margin: auto;
-  margin-top: 80px;
+  text-align: center;
   left: 0;
   right: 0;
-  width: 90vw;
+  padding: 4px 6px;
+  border-radius: 3px;
+  background-color: rgb(63, 63, 63);
+  color: white;
+  margin: 12px auto;
+  z-index: 3;
+  text-decoration: none;
+  width: fit-content;
+  height: fit-content;
+  font-family: sans-serif;
+  font-weight: 300;
+}
+
+/* Styles for aspect ratio of 1:1 or lower (square or portrait screens) */
+@media (max-aspect-ratio: 1/1) {
+  .cesiumContainer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .threeContainer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+/* Styles for aspect ratio greater than 1:1 (widescreen) */
+@media (min-aspect-ratio: 1/1) {
+  .cesiumContainer {
+    position: absolute;
+    width: min(100vw, 100vh);
+    height: min(100vw, 100vh);
+  }
+
+  .threeContainer {
+    position: absolute;
+    width: min(100vw, 100vh);
+    height: min(100vw, 100vh);
+  }
 }
