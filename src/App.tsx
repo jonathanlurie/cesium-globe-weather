@@ -12,12 +12,8 @@ import { TextureSequenceManager } from './TextureSequenceManager';
 window.CESIUM_BASE_URL = '/cesium';
 
 const earthRadiusMeter = 6371 * 1000;
-const envelopeRadius = earthRadiusMeter * 1.;
-
-// const objectScale = new Cartesian3(earthRadiusMeter, earthRadiusMeter, earthRadiusMeter);
-// console.log("objectScale", Cartesian3.fromDegrees(0, 0, 0));
-
-// Cartesian3.fromDegrees(0, 0, -earthRadiusMeter)
+// Clouds are floating on top so we can go thru/under
+const envelopeRadius = earthRadiusMeter * 1.01;
 
 
 function App() {
