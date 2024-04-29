@@ -32,7 +32,7 @@ body {
   pointer-events: none;
 }
 
-.ghLink {
+.links {
   position: absolute;
   top: 0;
   text-align: center;
@@ -41,14 +41,19 @@ body {
   padding: 4px 6px;
   border-radius: 3px;
   background-color: rgb(63, 63, 63);
-  color: white;
+  color: rgb(192, 192, 192);
   margin: 12px auto;
   z-index: 3;
-  text-decoration: none;
+  
   width: fit-content;
   height: fit-content;
   font-family: sans-serif;
   font-weight: 300;
+}
+
+.links a {
+  text-decoration: none;
+  color: white;
 }
 
 /* Styles for aspect ratio of 1:1 or lower (square or portrait screens) */

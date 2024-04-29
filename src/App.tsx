@@ -131,7 +131,10 @@ function App() {
 
   return (
     <>
-      <a className="ghLink" href="https://github.com/jonathanlurie/cesium-globe-weather">See source code on @jonathanlurie's GitHub</a>
+      <span className="links">
+      See source code on <a href="https://github.com/jonathanlurie/cesium-globe-weather">@jonathanlurie's GitHub</a><br></br>
+      Total cloud coverage data from <a href="https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=130&id_rubrique=51">Meteo France ARPEGE</a>
+      </span>
       <div className="threeContainer" ref={threeContainerRef}></div>
       <div className="cesiumContainer" ref={cesiumContainerRef}></div>
     </>
